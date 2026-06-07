@@ -1239,7 +1239,7 @@ with tabs[0]:
     if result and result.get("original_image"):
         c1, c2 = st.columns([2,1])
         with c1:
-            st.image(result["original_image"], use_container_width=True)
+            st.image(result["original_image"])
         with c2:
             fn = result.get("filename","—")
             ext = fn.rsplit(".",1)[-1].upper() if "." in fn else "—"
@@ -1252,7 +1252,7 @@ with tabs[0]:
                 <b>Mode:</b> {ori.mode}
               </div></div>""", unsafe_allow_html=True)
     elif st.session_state.original_image:
-        st.image(st.session_state.original_image, use_container_width=True)
+        st.image(st.session_state.original_image)
     else:
         st.info("Upload a chest radiograph to preview it here.")
 
@@ -1263,7 +1263,7 @@ with tabs[1]:
     if result and result.get("binary_mask"):
         c1, c2 = st.columns([2,1])
         with c1:
-            st.image(result["binary_mask"], use_container_width=True)
+            st.image(result["binary_mask"])
         with c2:
             cov = result["mask_coverage"]
             conf = result["confidence"]
@@ -1288,7 +1288,7 @@ with tabs[2]:
     if result and result.get("clinical_overlay"):
         c1, c2 = st.columns([2,1])
         with c1:
-            st.image(result["clinical_overlay"], use_container_width=True)
+            st.image(result["clinical_overlay"])
         with c2:
             pid = str(result.get("prediction_id","N/A"))
             st.markdown(f"""<div class='card'>
@@ -1553,15 +1553,15 @@ with tabs[6]:
         _c1, _c2, _c3 = st.columns(3, gap="medium")
         with _c1:
             st.markdown("<div style='text-align:center;font-weight:700;color:#2dd4bf;margin-bottom:.4rem'>📷 Original Radiograph</div>", unsafe_allow_html=True)
-            st.image(result["original_image"], use_container_width=True)
+            st.image(result["original_image"])
         with _c2:
             st.markdown("<div style='text-align:center;font-weight:700;color:#38bdf8;margin-bottom:.4rem'>🩻 Clinical Overlay</div>", unsafe_allow_html=True)
             if result.get("clinical_overlay"):
-                st.image(result["clinical_overlay"], use_container_width=True)
+                st.image(result["clinical_overlay"])
         with _c3:
             st.markdown("<div style='text-align:center;font-weight:700;color:#a78bfa;margin-bottom:.4rem'>🫁 Binary Mask</div>", unsafe_allow_html=True)
             if result.get("binary_mask"):
-                st.image(result["binary_mask"], use_container_width=True)
+                st.image(result["binary_mask"])
         st.markdown("<div style='height:.6rem'></div>", unsafe_allow_html=True)
         _s1, _s2, _s3, _s4 = st.columns(4)
         with _s1:

@@ -1,7 +1,5 @@
-name: "PulmoVision AI"
-theme: dark
+[theme]
+base = "light"
 
 [server]
 headless = true
-port = 8501
-enableCORS = false
