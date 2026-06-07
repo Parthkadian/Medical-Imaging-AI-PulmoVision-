@@ -1,0 +1,39 @@
+# PulmoVision AI Configuration File
+
+model:
+  name: "Attention U-Net"
+  backbone: "EfficientNetB0"
+  input_shape: [256, 256, 1]
+  loss: "Combined BCE + Dice"
+  metrics:
+    - "dice_coefficient"
+    - "iou_score"
+  
+inference:
+  default_threshold: 0.5
+  adaptive_thresholds: [127, 90, 60, 40, 25] # Gray value thresholds (0-255 scale)
+  min_plausible_coverage: 5.0                # Minimum % lung coverage to pass quality check
+  max_plausible_coverage: 55.0               # Maximum % lung coverage to pass quality check
+
+training:
+  epochs: 60
+  batch_size: 4
+  learning_rate: 0.0001
+  validation_split: 0.15
+  test_split: 0.15
+  seed: 42
+  early_stopping_patience: 12
+  reduce_lr_patience: 5
+  reduce_lr_factor: 0.5
+
+paths:
+  raw_image_dir: "data/raw/indiana/CXR_png"
+  raw_mask_dir: "data/raw/indiana/GTMask/combined"
+  model_save_path: "models/lung_unet_model.h5"
+  training_log: "models/training_log.csv"
+
+server:
+  host: "127.0.0.1"
+  port: 8000
+  reload: true
+  max_history_limit: 50

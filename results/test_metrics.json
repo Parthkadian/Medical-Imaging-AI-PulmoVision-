@@ -1,0 +1,17 @@
+{
+  "model_path": "models\\best_attention_unet.h5",
+  "model_name": "AttentionUNet_EfficientNetB0",
+  "mask_dir": "data\\raw\\indiana\\GTMask\\combined_png",
+  "test_samples": 8,
+  "thresholding": "adaptive percentile [70, 75, 80, 85]",
+  "image_size": 256,
+  "seed": 42,
+  "elapsed_seconds": 7.19,
+  "metrics": {
+    "dice_score": 0.27448,
+    "iou_score": 0.160225,
+    "precision": 0.307764,
+    "recall": 0.251182,
+    "f1_score": 0.274481
+  }
+}
