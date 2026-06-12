@@ -1,0 +1,31 @@
+FROM python:3.10-slim
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    libglib2.0-0 \
+    libgl1 \
+    libsm6 \
+    libxext6 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy and install requirements
+COPY requirements.txt .
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir \
+        streamlit==1.38.0 \
+        requests \
+        numpy==1.26.4 \
+        pillow==10.4.0 \
+        plotly==5.24.1 \
+        pydicom==2.4.4
+
+# Copy project files
+COPY . .
+
+# Expose port
+EXPOSE 8501
+
+# Run Streamlit
+CMD ["sh", "-c", "streamlit run dashboard/streamlit_app.py --server.port ${PORT:-8501} --server.address 0.0.0.0 --server.headless true"]
